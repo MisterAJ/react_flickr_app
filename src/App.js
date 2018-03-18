@@ -6,6 +6,7 @@ import axios from 'axios';
 import Navbar from './Components/Nav'
 
 import linkList from './Utils/linkList'
+import apiKey from './Utils/config'
 
 class App extends Component {
   constructor(props) {

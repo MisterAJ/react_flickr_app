@@ -1,26 +1,33 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
 
-import axios from 'axios';
+import axios from "axios";
 
-import Navbar from './Components/Nav'
+import Navbar from "./Components/Nav";
+import ImageContainer from "./Components/ImageContainer";
 
-import linkList from './Utils/linkList'
-import apiKey from './Utils/config'
+import linkList from "./Utils/linkList";
+import apiKey from "./Utils/config";
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      images: [],
-    }
+      images: []
+    };
+
+    this.imageSearch = this.imageSearch.bind(this);
   }
 
   async imageSearch(searchTerm) {
     try {
-      const response = await axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=${apiKey}&per_page=10&photo_id=${searchTerm}&format=json&nojsoncallback=1`);
-      console.log(response);
+      const response = await axios.get(
+        `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&per_page=12&safe_search=1&text=${searchTerm}&format=json&nojsoncallback=1`
+      );
+      this.setState((prevState, props) => {
+        return { images: response.data.photos.photo };
+      });
     } catch (error) {
       console.error(error);
     }
@@ -32,9 +39,7 @@ class App extends Component {
         <header className="App-header">
           <Navbar links={linkList} imageSearch={this.imageSearch} />
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <ImageContainer images={this.state.images} />
       </div>
     );
   }

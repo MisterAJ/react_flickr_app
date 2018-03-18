@@ -1,12 +1,12 @@
 import React from 'react';
 
 const NavBar = (props) => {
-    let linkList = props.links.map((link, i) => <li key={i}>{link.name}</li>)
+    let linkList = props.links.map((link, i) => <button key={i}onClick={() => props.imageSearch(link.name)}>{link.name}</button>)
     
     return (
-        <ul>
+        <div>
             {linkList}
-        </ul>
+        </div>
     )
 }
 

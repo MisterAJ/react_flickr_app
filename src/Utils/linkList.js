@@ -1,10 +1,13 @@
 const linkList = [
     {
-      name: 'dog'
+      name: 'Dog'
     },
     {
-      name: 'cat'
-    }
+      name: 'Cat'
+    },
+    {
+      name: 'Zebra'
+    },
   ]
 
 export default linkList;
